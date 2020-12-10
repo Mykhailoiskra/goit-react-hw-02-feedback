@@ -1,18 +1,20 @@
 import PropTypes from "prop-types";
+import styles from "./feedbackOptions.module.css";
+import happyLogo from "./happy.svg";
 
 function FeedbackOptions({ options, onLeaveFeedback }) {
   return (
-    <div className="buttons-wrapper">
+    <div className={styles.container}>
       {options.map((option) => (
         <button
-          className="feedbackBtn"
+          className={[styles.button, styles[option]].join(" ")}
           type="button"
           key={option}
           onClick={() => {
             onLeaveFeedback(option);
           }}
         >
-          {option}
+          <img src={happyLogo} alt="happy face" />
         </button>
       ))}
     </div>
