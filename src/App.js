@@ -1,5 +1,7 @@
 import React from "react";
 import Stats from "./components/Statistics/Statistics.jsx";
+import FeedbackOptions from "./components/FeedbackOptions/FeedbackOptions.jsx";
+import Section from "./components/Section/Section.jsx";
 
 class App extends React.Component {
   state = {
@@ -8,25 +10,10 @@ class App extends React.Component {
     bad: 0,
   };
 
-  // addGoodFeedback = () => {
-  //   this.setState((prevState) => {
-  //     return { good: prevState.good + 1 };
-  //   });
-  // };
-  // addNeutralFeedback = () => {
-  //   this.setState((prevState) => {
-  //     return { neutral: prevState.neutral + 1 };
-  //   });
-  // };
-  // addBadFeedback = () => {
-  //   this.setState((prevState) => {
-  //     return { bad: prevState.bad + 1 };
-  //   });
-  // };
-
-  onLeaveFeedback = (event) => {
-    console.log(this.state[event.target.getAttribute("data-type")]);
-    this.state[event.target.getAttribute("data-type")] = 1;
+  onLeaveFeedback = (option) => {
+    this.setState((prevState) => {
+      return { [option]: prevState[option] + 1 };
+    });
   };
 
   countTotalFeedback() {
@@ -51,34 +38,14 @@ class App extends React.Component {
 
     return (
       <>
-        <section className="section">
-          <h2>Please leave feedback</h2>
-          <div className="buttons-wrapper">
-            <button
-              type="submit"
-              data-type="good"
-              onClick={this.onLeaveFeedback}
-            >
-              Good
-            </button>
-            <button
-              type="submit"
-              data-type="neutral"
-              onClick={this.onLeaveFeedback}
-            >
-              Neutral
-            </button>
-            <button
-              type="submit"
-              data-type="bad"
-              onClick={this.onLeaveFeedback}
-            >
-              Bad
-            </button>
-          </div>
-        </section>
-        <section>
-          <h2>Statistics</h2>
+        <Section title="Leave your feedback">
+          <FeedbackOptions
+            options={Object.keys(this.state)}
+            onLeaveFeedback={this.onLeaveFeedback}
+          />
+        </Section>
+
+        <Section title="Statistics">
           <Stats
             good={good}
             neutral={neutral}
@@ -86,7 +53,7 @@ class App extends React.Component {
             total={this.countTotalFeedback()}
             positivePercentage={this.countPositiveFeedbackPercentage()}
           />
-        </section>
+        </Section>
       </>
     );
   }
