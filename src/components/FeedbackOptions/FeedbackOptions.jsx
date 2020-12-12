@@ -1,6 +1,5 @@
 import PropTypes from "prop-types";
 import styles from "./feedbackOptions.module.css";
-import happyLogo from "./happy.svg";
 
 function FeedbackOptions({ options, onLeaveFeedback }) {
   return (
@@ -14,7 +13,7 @@ function FeedbackOptions({ options, onLeaveFeedback }) {
             onLeaveFeedback(option);
           }}
         >
-          <img src={happyLogo} alt="happy face" />
+          {option}
         </button>
       ))}
     </div>
