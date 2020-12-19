@@ -32,15 +32,13 @@ class App extends React.Component {
   }
 
   render() {
-    const { good } = this.state;
-    const { neutral } = this.state;
-    const { bad } = this.state;
+    const { good, neutral, bad } = this.state;
 
     return (
       <>
         <Section title="Leave your feedback">
           <FeedbackOptions
-            options={Object.keys(this.state)}
+            options={["good", "neutral", "bad"]}
             onLeaveFeedback={this.onLeaveFeedback}
           />
         </Section>
